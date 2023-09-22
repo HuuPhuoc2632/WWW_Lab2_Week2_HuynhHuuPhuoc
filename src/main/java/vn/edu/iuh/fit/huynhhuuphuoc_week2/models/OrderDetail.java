@@ -3,11 +3,14 @@ package vn.edu.iuh.fit.huynhhuuphuoc_week2.models;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "order_detail")
 public class OrderDetail {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long orderDetailId;
+    @Column(nullable = false)
     private int quantity;
+    @Column(nullable = false)
     private double price;
 
     @ManyToOne
@@ -17,8 +20,21 @@ public class OrderDetail {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+    private String note;
 
     // Constructors, getters, and setters
+
+    public OrderDetail(Long orderDetailId, int quantity, double price, Order order, Product product, String note) {
+        this.orderDetailId = orderDetailId;
+        this.quantity = quantity;
+        this.price = price;
+        this.order = order;
+        this.product = product;
+        this.note = note;
+    }
+
+    public OrderDetail() {
+    }
 
     public Long getOrderDetailId() {
         return orderDetailId;
@@ -60,15 +76,12 @@ public class OrderDetail {
         this.product = product;
     }
 
-    public OrderDetail(Long orderDetailId, int quantity, double price, Order order, Product product) {
-        this.orderDetailId = orderDetailId;
-        this.quantity = quantity;
-        this.price = price;
-        this.order = order;
-        this.product = product;
+    public String getNote() {
+        return note;
     }
 
-    public OrderDetail() {
+    public void setNote(String note) {
+        this.note = note;
     }
 
     @Override
@@ -79,6 +92,7 @@ public class OrderDetail {
                 ", price=" + price +
                 ", order=" + order +
                 ", product=" + product +
+                ", note='" + note + '\'' +
                 '}';
     }
 }

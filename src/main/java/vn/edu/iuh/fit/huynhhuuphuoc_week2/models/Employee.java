@@ -4,19 +4,33 @@ import jakarta.persistence.*;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.enums.EmployeeStatus;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
+@Table(name = "employee")
+@NamedQueries(
+        @NamedQuery(name = "Employee.findAll", query = "select e from employee e where e.status =1")
+)
 public class Employee {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "emp_id")
     private Long empId;
+    @Column(name = "full_name", length = 150, nullable = false)
     private String fullName;
+    @Column(nullable = false)
     private Date dob;
+    @Column(unique = true, length = 150)
     private String email;
+    @Column(length = 15, nullable = false)
     private String phone;
+    @Column(length = 250, nullable = false)
     private String address;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(name = "status", nullable = false)
     private EmployeeStatus status;
+    @OneToMany(mappedBy = "employee")
+    private List<Order> orderList;
 
     public Long getEmpId() {
         return empId;

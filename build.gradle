@@ -27,6 +27,12 @@ dependencies {
 
     testImplementation("org.junit.jupiter:junit-jupiter-api:${junitVersion}")
     testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:${junitVersion}")
+    implementation 'org.mariadb.jdbc:mariadb-java-client:3.2.0'
+    implementation 'org.slf4j:slf4j-api:2.0.9'
+    implementation 'org.slf4j:slf4j-simple:2.0.9'
+    // https://mvnrepository.com/artifact/org.eclipse.persistence/org.eclipse.persistence.jpa
+    implementation group: 'org.eclipse.persistence', name: 'org.eclipse.persistence.jpa', version: '2.5.0'
+
 }
 
 test {

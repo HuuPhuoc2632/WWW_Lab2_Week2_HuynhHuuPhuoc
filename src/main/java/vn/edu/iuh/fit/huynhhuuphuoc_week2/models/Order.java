@@ -3,17 +3,30 @@ package vn.edu.iuh.fit.huynhhuuphuoc_week2.models;
 import jakarta.persistence.*;
 
 import java.sql.Date;
+import java.util.List;
 
 @Entity
+@Table(name = "order")
+@NamedQueries(
+        @NamedQuery(name = "Order.findAll", query = "select  o from order o")
+)
 public class Order {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "order_id")
     private Long orderId;
+    @Column(name = "order_date")
     private Date orderDate;
 
     @ManyToOne
     @JoinColumn(name = "emp_id")
     private Employee employee;
+    @ManyToOne
+    @JoinColumn(name = "cust_id")
+    private Customer customer;
+
+    @OneToMany
+    private List<OrderDetail> orderDetails;
 
     // Constructors, getters, and setters
 

@@ -5,29 +5,41 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.PersistenceContext;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.enums.EmployeeStatus;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.models.Employee;
+import vn.edu.iuh.fit.huynhhuuphuoc_week2.repositories.EmployeeRepository;
 
-@Stateless
+import java.util.List;
+import java.util.Optional;
+
 public class EmployeeService {
-    @PersistenceContext
-    private EntityManager entityManager;
+    private EmployeeRepository employeeRepository;
 
-    public void createEmployee(Employee employee) {
-        entityManager.persist(employee);
+    public EmployeeService() {
+        employeeRepository = new EmployeeRepository();
     }
 
-    public Employee getEmployeeById(Long empId) {
-        return entityManager.find(Employee.class, empId);
+    public void insertEmp(Employee employee) {
+        employeeRepository.insertEmp(employee);
     }
 
-    public void updateEmployee(Employee employee) {
-        entityManager.merge(employee);
+    public void updateEmp(Employee employee) {
+        employeeRepository.update(employee);
     }
 
-    public void deleteEmployee(Long empId) {
-        Employee employee = entityManager.find(Employee.class, empId);
-        if (employee != null) {
-            employee.setStatus(EmployeeStatus.IN_ACTIVE);
-            entityManager.merge(employee);
+    public boolean deleteEmp(long id) {
+        Optional<Employee> op = employeeRepository.findById(id);
+        if (op.isPresent()) {
+            Employee employee = op.get();
+            employee.setStatus(EmployeeStatus.TERMINATED);
+            return true;
         }
+        return false;
+    }
+
+    public Optional<Employee> findById(long id) {
+        return employeeRepository.findById(id);
+    }
+
+    public List<Employee> getAll() {
+        return employeeRepository.getAllEmp();
     }
 }

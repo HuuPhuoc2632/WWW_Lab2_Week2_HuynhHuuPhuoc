@@ -1,21 +1,42 @@
 package vn.edu.iuh.fit.huynhhuuphuoc_week2.models;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.enums.ProductStatus;
 
+import java.util.List;
+
 @Entity
+@Table(name = "product")
+@NamedQueries(
+        @NamedQuery(name = "Product.findAll", query = "select p from product p")
+)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "product_id")
     private Long productId;
+    @Column(length = 150, nullable = false)
     private String name;
+
+    @Column(length = 300, nullable = false)
     private String description;
+
+    @Column(length = 120, nullable = false)
     private String unit;
+    @Column(name = "manufacturer_name", length = 120, nullable = false)
     private String manufacturerName;
+    @Enumerated(EnumType.ORDINAL)
+    @Column(nullable = false)
     private ProductStatus status;
+
+    @OneToMany(mappedBy = "product")
+    private List<ProductImage> productImages;
+
+    @OneToMany(mappedBy = "product")
+    private List<OrderDetail> orderDetails;
+
+    @OneToMany(mappedBy = "")
+    private List<ProductPrice> productPrices;
 
     public Product(Long productId, String name, String description, String unit, String manufacturerName, ProductStatus status) {
         this.productId = productId;

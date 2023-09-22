@@ -3,11 +3,15 @@ package vn.edu.iuh.fit.huynhhuuphuoc_week2.models;
 import jakarta.persistence.*;
 
 @Entity
+@Table(name = "product_image")
 public class ProductImage {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "image_id")
     private Long imageId;
+    @Column(length = 250, nullable = false)
     private String path;
+    @Column(length = 250)
     private String alternative;
 
     @ManyToOne

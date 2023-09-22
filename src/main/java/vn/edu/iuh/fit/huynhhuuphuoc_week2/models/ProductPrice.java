@@ -5,11 +5,12 @@ import jakarta.persistence.*;
 import java.sql.Date;
 
 @Entity
+@Table(name = "product_price")
 public class ProductPrice {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long priceId;
+    @Column(nullable = false, name = "price_date_time")
     private Date priceDateTime;
+    @Column(nullable = false)
     private double price;
     private String note;
 
@@ -19,8 +20,7 @@ public class ProductPrice {
 
     // Constructors, getters, and setters
 
-    public ProductPrice(Long priceId, Date priceDateTime, double price, String note, Product product) {
-        this.priceId = priceId;
+    public ProductPrice(Date priceDateTime, double price, String note, Product product) {
         this.priceDateTime = priceDateTime;
         this.price = price;
         this.note = note;
@@ -30,13 +30,6 @@ public class ProductPrice {
     public ProductPrice() {
     }
 
-    public Long getPriceId() {
-        return priceId;
-    }
-
-    public void setPriceId(Long priceId) {
-        this.priceId = priceId;
-    }
 
     public Date getPriceDateTime() {
         return priceDateTime;
@@ -73,7 +66,6 @@ public class ProductPrice {
     @Override
     public String toString() {
         return "ProductPrice{" +
-                "priceId=" + priceId +
                 ", priceDateTime=" + priceDateTime +
                 ", price=" + price +
                 ", note='" + note + '\'' +
