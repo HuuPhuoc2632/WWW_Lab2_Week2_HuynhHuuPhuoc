@@ -1,19 +1,15 @@
 package vn.edu.iuh.fit.huynhhuuphuoc_week2.services;
 
-import jakarta.ejb.Stateless;
-import jakarta.persistence.EntityManager;
-import jakarta.persistence.PersistenceContext;
-import vn.edu.iuh.fit.huynhhuuphuoc_week2.enums.EmployeeStatus;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.models.Employee;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.repositories.EmployeeRepository;
 
 import java.util.List;
 import java.util.Optional;
 
-public class EmployeeService {
+public class EmployeeServices {
     private EmployeeRepository employeeRepository;
 
-    public EmployeeService() {
+    public EmployeeServices() {
         employeeRepository = new EmployeeRepository();
     }
 
@@ -22,14 +18,13 @@ public class EmployeeService {
     }
 
     public void updateEmp(Employee employee) {
-        employeeRepository.update(employee);
+        employeeRepository.updateEmp(employee);
     }
 
     public boolean deleteEmp(long id) {
         Optional<Employee> op = employeeRepository.findById(id);
         if (op.isPresent()) {
             Employee employee = op.get();
-            employee.setStatus(EmployeeStatus.TERMINATED);
             return true;
         }
         return false;
@@ -42,4 +37,5 @@ public class EmployeeService {
     public List<Employee> getAll() {
         return employeeRepository.getAllEmp();
     }
+
 }

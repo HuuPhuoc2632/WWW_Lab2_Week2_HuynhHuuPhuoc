@@ -2,46 +2,61 @@ package vn.edu.iuh.fit.huynhhuuphuoc_week2.models;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
+
 @Entity
 @Table(name = "order_detail")
+@IdClass(OrderDetail.OrderProductPK.class)
+@NamedQueries(
+        @NamedQuery(name = "Order_detail.findAll",  query = "select od from Order_detail  od")
+)
 public class OrderDetail {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long orderDetailId;
-    @Column(nullable = false)
-    private int quantity;
-    @Column(nullable = false)
-    private double price;
-
     @ManyToOne
     @JoinColumn(name = "order_id")
     private Order order;
 
+    @Id
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    @Column(nullable = false)
+    private int quantity;
+    @Column(nullable = false)
+    private double price;
     private String note;
 
-    // Constructors, getters, and setters
 
-    public OrderDetail(Long orderDetailId, int quantity, double price, Order order, Product product, String note) {
-        this.orderDetailId = orderDetailId;
-        this.quantity = quantity;
-        this.price = price;
+
+    public static class OrderProductPK implements Serializable {
+        private long order;
+        private long product;
+
+        public OrderProductPK() {
+        }
+
+        public OrderProductPK(long order_id, long product_id) {
+            this.order = order;
+            this.product = product;
+        }
+    }
+
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
         this.order = order;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
         this.product = product;
-        this.note = note;
-    }
-
-    public OrderDetail() {
-    }
-
-    public Long getOrderDetailId() {
-        return orderDetailId;
-    }
-
-    public void setOrderDetailId(Long orderDetailId) {
-        this.orderDetailId = orderDetailId;
     }
 
     public int getQuantity() {
@@ -60,22 +75,6 @@ public class OrderDetail {
         this.price = price;
     }
 
-    public Order getOrder() {
-        return order;
-    }
-
-    public void setOrder(Order order) {
-        this.order = order;
-    }
-
-    public Product getProduct() {
-        return product;
-    }
-
-    public void setProduct(Product product) {
-        this.product = product;
-    }
-
     public String getNote() {
         return note;
     }
@@ -84,14 +83,24 @@ public class OrderDetail {
         this.note = note;
     }
 
+    public OrderDetail() {
+    }
+
+    public OrderDetail(Order order, Product product, int quantity, double price, String note) {
+        this.order = order;
+        this.product = product;
+        this.quantity = quantity;
+        this.price = price;
+        this.note = note;
+    }
+
     @Override
     public String toString() {
-        return "OrderDetail{" +
-                "orderDetailId=" + orderDetailId +
+        return "Order_detail{" +
+                "order=" + order +
+                ", product=" + product +
                 ", quantity=" + quantity +
                 ", price=" + price +
-                ", order=" + order +
-                ", product=" + product +
                 ", note='" + note + '\'' +
                 '}';
     }

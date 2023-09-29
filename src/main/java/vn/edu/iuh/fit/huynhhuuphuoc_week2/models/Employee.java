@@ -1,5 +1,6 @@
 package vn.edu.iuh.fit.huynhhuuphuoc_week2.models;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.enums.EmployeeStatus;
 
@@ -29,6 +30,7 @@ public class Employee {
     @Enumerated(EnumType.ORDINAL)
     @Column(name = "status", nullable = false)
     private EmployeeStatus status;
+    @JsonbTransient
     @OneToMany(mappedBy = "employee")
     private List<Order> orderList;
 

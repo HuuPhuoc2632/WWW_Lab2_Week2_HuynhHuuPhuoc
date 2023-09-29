@@ -1,5 +1,6 @@
 package vn.edu.iuh.fit.huynhhuuphuoc_week2.models;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 
 import java.util.List;
@@ -7,13 +8,14 @@ import java.util.List;
 @Entity
 @Table(name = "customer")
 @NamedQueries(
-        @NamedQuery(name = "Customer.findAll", query = "select c from customer c ")
+        @NamedQuery(name = "Customer.findAll", query = "select c from Customer c ")
 )
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cust_id")
     private long id;
+
     @Column(name = "cust_name", length = 150, nullable = false)
     private String name;
     @Column(name = "email", length = 70, nullable = false)
@@ -22,7 +24,9 @@ public class Customer {
     private String phone;
     @Column(name = "address", length = 200, nullable = false)
     private String address;
-    @OneToMany
+
+    @JsonbTransient
+    @OneToMany(mappedBy = "customer")
     private List<Order> orderList;
 
     public long getId() {
@@ -101,7 +105,6 @@ public class Customer {
                 ", email='" + email + '\'' +
                 ", phone='" + phone + '\'' +
                 ", address='" + address + '\'' +
-                ", orderList=" + orderList +
                 '}';
     }
 }

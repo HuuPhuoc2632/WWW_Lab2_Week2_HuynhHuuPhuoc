@@ -1,5 +1,6 @@
 package vn.edu.iuh.fit.huynhhuuphuoc_week2.models;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.enums.ProductStatus;
 
@@ -8,13 +9,14 @@ import java.util.List;
 @Entity
 @Table(name = "product")
 @NamedQueries(
-        @NamedQuery(name = "Product.findAll", query = "select p from product p")
+        @NamedQuery(name = "Product.findAll", query = "select p from Product p")
 )
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "product_id")
-    private Long productId;
+    private long id;
+
     @Column(length = 150, nullable = false)
     private String name;
 
@@ -23,36 +25,30 @@ public class Product {
 
     @Column(length = 120, nullable = false)
     private String unit;
-    @Column(name = "manufacturer_name", length = 120, nullable = false)
-    private String manufacturerName;
+    @Column(length = 120, nullable = false)
+    private String manufacturer_name;
+
     @Enumerated(EnumType.ORDINAL)
     @Column(nullable = false)
     private ProductStatus status;
 
+    @JsonbTransient
     @OneToMany(mappedBy = "product")
     private List<ProductImage> productImages;
-
+    @JsonbTransient
     @OneToMany(mappedBy = "product")
     private List<OrderDetail> orderDetails;
 
-    @OneToMany(mappedBy = "")
+    @JsonbTransient
+    @OneToMany(mappedBy = "product")
     private List<ProductPrice> productPrices;
 
-    public Product(Long productId, String name, String description, String unit, String manufacturerName, ProductStatus status) {
-        this.productId = productId;
-        this.name = name;
-        this.description = description;
-        this.unit = unit;
-        this.manufacturerName = manufacturerName;
-        this.status = status;
+    public long getId() {
+        return id;
     }
 
-    public Long getProductId() {
-        return productId;
-    }
-
-    public void setProductId(Long productId) {
-        this.productId = productId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -79,12 +75,12 @@ public class Product {
         this.unit = unit;
     }
 
-    public String getManufacturerName() {
-        return manufacturerName;
+    public String getManufacturer_name() {
+        return manufacturer_name;
     }
 
-    public void setManufacturerName(String manufacturerName) {
-        this.manufacturerName = manufacturerName;
+    public void setManufacturer_name(String manufacturer_name) {
+        this.manufacturer_name = manufacturer_name;
     }
 
     public ProductStatus getStatus() {
@@ -98,15 +94,40 @@ public class Product {
     public Product() {
     }
 
+
+    public Product(long id, String name, String description, String unit, String manufacturer_name, ProductStatus status) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.unit = unit;
+        this.manufacturer_name = manufacturer_name;
+        this.status = status;
+    }
+
+    public Product(long id, String name, String description, String unit, String manufacturer_name, ProductStatus status, List<ProductImage> productImages, List<OrderDetail> orderDetails, List<ProductPrice> productPrices) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.unit = unit;
+        this.manufacturer_name = manufacturer_name;
+        this.status = status;
+        this.productImages = productImages;
+        this.orderDetails = orderDetails;
+        this.productPrices = productPrices;
+    }
+
     @Override
     public String toString() {
         return "Product{" +
-                "productId=" + productId +
+                "id=" + id +
                 ", name='" + name + '\'' +
                 ", description='" + description + '\'' +
                 ", unit='" + unit + '\'' +
-                ", manufacturerName='" + manufacturerName + '\'' +
+                ", manufacturer_name='" + manufacturer_name + '\'' +
                 ", status=" + status +
+                ", productImages=" + productImages +
+                ", orderDetails=" + orderDetails +
+                ", productPrices=" + productPrices +
                 '}';
     }
 }

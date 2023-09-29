@@ -1,5 +1,6 @@
 package vn.edu.iuh.fit.huynhhuuphuoc_week2.models;
 
+import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 
 import java.sql.Date;
@@ -24,7 +25,7 @@ public class Order {
     @ManyToOne
     @JoinColumn(name = "cust_id")
     private Customer customer;
-
+    @JsonbTransient
     @OneToMany
     private List<OrderDetail> orderDetails;
 
