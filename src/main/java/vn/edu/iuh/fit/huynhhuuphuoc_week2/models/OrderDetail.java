@@ -8,7 +8,7 @@ import java.io.Serializable;
 @Table(name = "order_detail")
 @IdClass(OrderDetail.OrderProductPK.class)
 @NamedQueries(
-        @NamedQuery(name = "Order_detail.findAll",  query = "select od from Order_detail  od")
+        @NamedQuery(name = "Order_detail.findAll",  query = "select od from OrderDetail  od")
 )
 public class OrderDetail {
     @Id

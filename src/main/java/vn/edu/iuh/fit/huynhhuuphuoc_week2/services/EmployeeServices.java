@@ -1,5 +1,6 @@
 package vn.edu.iuh.fit.huynhhuuphuoc_week2.services;
 
+import vn.edu.iuh.fit.huynhhuuphuoc_week2.enums.EmployeeStatus;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.models.Employee;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.repositories.EmployeeRepository;
 
@@ -22,15 +23,12 @@ public class EmployeeServices {
     }
 
     public boolean deleteEmp(long id) {
-        Optional<Employee> op = employeeRepository.findById(id);
-        if (op.isPresent()) {
-            Employee employee = op.get();
-            return true;
-        }
-        return false;
+        Employee e = employeeRepository.findById(id);
+
+        return employeeRepository.deleteEmp(e);
     }
 
-    public Optional<Employee> findById(long id) {
+    public Employee findById(long id) {
         return employeeRepository.findById(id);
     }
 

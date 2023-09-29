@@ -7,9 +7,9 @@ import java.sql.Date;
 import java.util.List;
 
 @Entity
-@Table(name = "order")
+@Table(name = "orders")
 @NamedQueries(
-        @NamedQuery(name = "Order.findAll", query = "select  o from order o")
+        @NamedQuery(name = "Order.findAll", query = "select  o from Order o")
 )
 public class Order {
     @Id

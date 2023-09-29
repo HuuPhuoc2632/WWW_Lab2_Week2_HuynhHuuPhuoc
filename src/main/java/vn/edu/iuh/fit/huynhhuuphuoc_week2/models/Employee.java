@@ -4,13 +4,13 @@ import jakarta.json.bind.annotation.JsonbTransient;
 import jakarta.persistence.*;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.enums.EmployeeStatus;
 
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 
 @Entity
 @Table(name = "employee")
 @NamedQueries(
-        @NamedQuery(name = "Employee.findAll", query = "select e from employee e where e.status =1")
+        @NamedQuery(name = "Employee.findAll", query = "select e from Employee e")
 )
 public class Employee {
     @Id

@@ -5,6 +5,7 @@ import jakarta.persistence.Persistence;
 import jakarta.persistence.TypedQuery;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import vn.edu.iuh.fit.huynhhuuphuoc_week2.enums.EmployeeStatus;
 import vn.edu.iuh.fit.huynhhuuphuoc_week2.models.Employee;
 
 
@@ -19,7 +20,7 @@ public class EmployeeRepository {
     private final Logger logger = LoggerFactory.getLogger(this.getClass().getName());
 
     public EmployeeRepository() {
-        em = Persistence.createEntityManagerFactory("lab_week_2").createEntityManager();
+        em = Persistence.createEntityManagerFactory("HuuPhuoc").createEntityManager();
         trans = em.getTransaction();
     }
 
@@ -42,12 +43,26 @@ public class EmployeeRepository {
             e.printStackTrace();
         }
     }
+    public boolean deleteEmp(Employee e) {
+        if (e.getEmpId()!=null) {
+            e.setStatus(EmployeeStatus.TERMINATED);
+            try {
+                trans.begin();
+                em.merge(e);
+                trans.commit();
+                return true;
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
+        return false;
 
-    public Optional<Employee> findById(long id) {
-        TypedQuery<Employee> query = em.createQuery("select e from Employee e where e.id=:id", Employee.class);
+    }
+
+    public Employee findById(long id) {
+        TypedQuery<Employee> query = em.createQuery("select e from Employee e where e.empId=:id", Employee.class);
         query.setParameter("id", id);
-        Employee employee = query.getSingleResult();
-        return employee == null ? Optional.empty() : Optional.of(employee);
+        return query.getSingleResult();
     }
 
     public List<Employee> getAllEmp() {

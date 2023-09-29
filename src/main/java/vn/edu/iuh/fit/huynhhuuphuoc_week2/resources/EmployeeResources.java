@@ -21,7 +21,7 @@ public class EmployeeResources {
 
     @GET
     @Produces("application/json")
-    public Response getAlll() {
+    public Response getAll() {
         List<Employee> employeeList = employeeServices.getAll();
         return Response.ok(employeeList).build();
     }
@@ -30,9 +30,9 @@ public class EmployeeResources {
     @Produces("application/json")
     @Path("/{id}")
     public Response getEmp(@PathParam("id") long eid) {
-        Optional<Employee> empOpt = employeeServices.findById(eid);
-        if (empOpt.isPresent()) {
-            return Response.ok(empOpt.get()).build();
+        Employee empOpt = employeeServices.findById(eid);
+        if (empOpt.getEmpId()!=null) {
+            return Response.ok(empOpt).build();
         }
         return Response.status(Response.Status.BAD_REQUEST).build();
     }
