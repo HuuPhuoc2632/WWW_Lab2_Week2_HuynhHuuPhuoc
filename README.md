@@ -25,7 +25,11 @@ Update Employee
 ![image](https://github.com/HuuPhuoc2632/WWW_Lab2_Week2_HuynhHuuPhuoc/assets/125341224/ffc39a3e-1a64-47a9-8a2f-59f28191cc8a)  
 Delete Employee  
 ![image](https://github.com/HuuPhuoc2632/WWW_Lab2_Week2_HuynhHuuPhuoc/assets/125341224/1ff75326-0f1d-46fc-84cb-de41173c4052)  
-![image](https://github.com/HuuPhuoc2632/WWW_Lab2_Week2_HuynhHuuPhuoc/assets/125341224/76dbf26f-e393-4497-a638-dd44daf529cb)
+![image](https://github.com/HuuPhuoc2632/WWW_Lab2_Week2_HuynhHuuPhuoc/assets/125341224/76dbf26f-e393-4497-a638-dd44daf529cb)  
+Thống kê theo thời gian  
+![image](https://github.com/HuuPhuoc2632/WWW_Lab2_Week2_HuynhHuuPhuoc/assets/125341224/a77b22da-36ab-4823-b0dd-15b158bf2877)  
+
+
 
 
 
