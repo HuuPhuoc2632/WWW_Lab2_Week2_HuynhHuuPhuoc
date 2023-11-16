@@ -11,7 +11,7 @@
 - product_price (product_id, price_date_time, price, note)
 ## Tính năng:
 - Các thao tác CRUD cho các đối tượng
-- Thống kê order theo ngày, theo khoảng thời gian
+- Thống kê order theo khoảng thời gian
 - Thống kê order theo nhân viên bán hàng trong 1 khoảng thời gian
 ## Sơ đồ cơ sở dữ liệu  
 ![image](https://github.com/HuuPhuoc2632/WWW_Lab2_Week2_HuynhHuuPhuoc/assets/125341224/e5b8d621-950e-405f-8f87-d3696f7bba3a)  
