@@ -21,7 +21,10 @@ CRUD Employee
 Add employee success  
 ![image](https://github.com/HuuPhuoc2632/WWW_Lab2_Week2_HuynhHuuPhuoc/assets/125341224/ad5f3b93-f43c-41fc-9cea-ff1592a6a4b1)  
 Update Employee
-![image](https://github.com/HuuPhuoc2632/WWW_Lab2_Week2_HuynhHuuPhuoc/assets/125341224/836e522a-15e5-4249-949b-9fea7344b514)
+![image](https://github.com/HuuPhuoc2632/WWW_Lab2_Week2_HuynhHuuPhuoc/assets/125341224/836e522a-15e5-4249-949b-9fea7344b514)  
+![image](https://github.com/HuuPhuoc2632/WWW_Lab2_Week2_HuynhHuuPhuoc/assets/125341224/ffc39a3e-1a64-47a9-8a2f-59f28191cc8a)
+
+
 
 
 
